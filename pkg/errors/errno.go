@@ -5,17 +5,22 @@ type ErrNumber int
 
 // const 错误码
 const (
-	Err = (ErrNumber)(10000)
+	Err ErrNumber = (10000)
 
-	// 已存在
-	ErrExists = (ErrNumber)(10400)
+	// 参数解析失败
+	ErrBadRequest ErrNumber = (10400)
 
-	// 密码错误
-	ErrPasswd = (ErrNumber)(10401)
+	// 鉴权失败
+	ErrAuthVerify ErrNumber = (10401)
 
 	// 没有权限
-	ErrPermissionDenied = (ErrNumber)(10403)
+	ErrPermissionDenied ErrNumber = (10403)
 
 	// 不存在
-	ErrNotFound = (ErrNumber)(10404)
+	ErrNotFound ErrNumber = (10404)
+
+	// 用户已存在
+	ErrUserEmailExist ErrNumber = 11000
+	ErrUserNotFound   ErrNumber = 11001
+	ErrUserPasswd     ErrNumber = 11002
 )

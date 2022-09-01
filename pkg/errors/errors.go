@@ -79,6 +79,11 @@ func NewHTTPBadRequest(msg ...string) *ErrCode {
 	}
 }
 
+// NewCode ...
+func NewCode(code ErrNumber) *ErrCode {
+	return newErrorCode(code, "")
+}
+
 // NewErrCode ...
 func NewErrCode(code ErrNumber, msg string) *ErrCode {
 	return newErrorCode(code, msg)
