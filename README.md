@@ -15,15 +15,17 @@
 6. 全文搜索功能
 
 
-## 启动
+## 简介
 
---config 可以指定配置文件的路径，不指定默认 config/config.json
+项目中使用到 `mysql` 和 `redis` 请在启动前确保 能正常连接的 `mysql` 和 `redis`，相关的配置文件在 [config/config.json](config/config.json)
+
+--config 可以指定配置文件的路径，不指定默认 [config/config.json](config/config.json)
 
 ```bash
 go run main.go
 ```
 
-[`Postman测试地址`](https://www.postman.com/orange-sunset-547788/workspace/demo/collection/3972752-a7e0121c-18c7-4245-b1ab-b85a1ef34631?action=share&creator=3972752)
+[Postman测试地址](https://www.postman.com/orange-sunset-547788/workspace/demo/collection/3972752-a7e0121c-18c7-4245-b1ab-b85a1ef34631?action=share&creator=3972752)
 
 [或者Postman接口的json](./demo.postman_collection.json)
 
