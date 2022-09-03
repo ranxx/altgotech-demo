@@ -66,3 +66,8 @@ func (s *Service) UpdateAdmin(ctx context.Context, id, admin int) error {
 func (s *Service) Get(ctx context.Context, id int) (*model.Space, error) {
 	return s.d.Get(ctx, id)
 }
+
+// Joined 是否加入或者自己创建
+func (s *Service) Joined(ctx context.Context, uid, sid int) (bool, error) {
+	return s.d.Joined(ctx, uid, sid)
+}

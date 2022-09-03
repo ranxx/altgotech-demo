@@ -136,6 +136,12 @@ func (a *Article) Top(ctx *gin.Context) (interface{}, error) {
 	}
 
 	// 取参数
+	sid, err := strconv.ParseInt(ctx.Param("sid"), 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	// 取参数
 	aid, err := strconv.ParseInt(ctx.Param("aid"), 10, 64)
 	if err != nil {
 		return nil, err
@@ -146,6 +152,7 @@ func (a *Article) Top(ctx *gin.Context) (interface{}, error) {
 		return nil, errors.NewErrCode(errors.ErrBadRequest, err.Error())
 	}
 	req.AID = int(aid)
+	req.Space = int(sid)
 
 	resp, err := article.NewArticle(ctx).Top(ctx, int(uid), req)
 	if err != nil {
@@ -190,6 +197,11 @@ func (a *Article) Detail(ctx *gin.Context) (interface{}, error) {
 	}
 
 	// 取参数
+	sid, err := strconv.ParseInt(ctx.Param("sid"), 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	// 取参数
 	aid, err := strconv.ParseInt(ctx.Param("aid"), 10, 64)
 	if err != nil {
 		return nil, err
@@ -200,6 +212,7 @@ func (a *Article) Detail(ctx *gin.Context) (interface{}, error) {
 		return nil, errors.NewErrCode(errors.ErrBadRequest, err.Error())
 	}
 	req.AID = int(aid)
+	req.Space = int(sid)
 
 	resp, err := article.NewArticle(ctx).Detail(ctx, int(uid), req)
 	if err != nil {

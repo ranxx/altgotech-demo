@@ -68,8 +68,9 @@ type ArticleUnLikeResponse struct {
 
 // ArticleTopRequest 置顶 请求
 type ArticleTopRequest struct {
-	AID int  `json:"aid"`
-	Top bool `json:"top"`
+	AID   int  `json:"aid"`
+	Space int  `json:"space"`
+	Top   bool `json:"top"`
 }
 
 // ArticleTopResponse 置顶 返回
@@ -93,7 +94,8 @@ type ArticleListResponse struct {
 
 // ArticleDetailRequest 详情 请求
 type ArticleDetailRequest struct {
-	AID int `json:"aid"`
+	AID   int `json:"aid"`
+	Space int `json:"space"`
 }
 
 // ArticleDetailResponse 详情 返回

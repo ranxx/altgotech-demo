@@ -7,8 +7,10 @@ import (
 
 	"github.com/ranxx/altgotech-demo/app/request"
 	"github.com/ranxx/altgotech-demo/pkg/db"
+	"github.com/ranxx/altgotech-demo/pkg/errors"
 	"github.com/ranxx/altgotech-demo/service/article"
 	"github.com/ranxx/altgotech-demo/service/article/model"
+	"github.com/ranxx/altgotech-demo/service/space"
 )
 
 // Article 文章
@@ -123,6 +125,16 @@ func (a *Article) UnLike(ctx context.Context, uid int, req *request.ArticleUnLik
 func (a *Article) Top(ctx context.Context, uid int, req *request.ArticleTopRequest) (*request.ArticleTopResponse, error) {
 	svc := a.GetService()
 
+	// 判断权限
+	detail, _ := space.NewService().Get(ctx, req.Space)
+	if detail == nil {
+		return &request.ArticleTopResponse{}, nil
+	}
+
+	if detail.CreatorID != uid && detail.AdminID != uid {
+		return nil, errors.NewErrCode(errors.ErrSpaceNoTop, "你不是板块的管理员/创建人，禁止操作")
+	}
+
 	err := svc.Top(ctx, req.AID, req.Top)
 
 	return &request.ArticleTopResponse{}, err
@@ -144,6 +156,15 @@ func ConvertArticleFromModel(item *model.Article) *request.Article {
 // List 文章列表
 func (a *Article) List(ctx context.Context, uid int, req *request.ArticleListRequest) (*request.ArticleListResponse, error) {
 	svc := a.GetService()
+
+	// 板块是不是自己的或者加入的
+	ok, err := space.NewService().Joined(ctx, uid, req.Space)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, errors.NewErrCode(errors.ErrSpaceNoAccess, "未加入板块，暂无权限访问")
+	}
 
 	items, total, err := svc.List(ctx, req.Space, req.Offset, req.Limit)
 	if err != nil {
@@ -186,6 +207,15 @@ func (a *Article) List(ctx context.Context, uid int, req *request.ArticleListReq
 func (a *Article) Detail(ctx context.Context, uid int, req *request.ArticleDetailRequest) (*request.ArticleDetailResponse, error) {
 	svc := a.GetService()
 
+	// 板块是不是自己的或者加入的
+	ok, err := space.NewService().Joined(ctx, uid, req.Space)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, errors.NewErrCode(errors.ErrSpaceNoAccess, "未加入板块，暂无权限访问")
+	}
+
 	item, err := svc.Get(ctx, req.AID)
 	if err != nil {
 		return nil, err
@@ -193,7 +223,7 @@ func (a *Article) Detail(ctx context.Context, uid int, req *request.ArticleDetai
 
 	like, _ := svc.LikeTotal(ctx, req.AID)
 	comments, _, _ := svc.ListComment(ctx, int64(req.AID), -1, -1) // -1 全部返回
-	ok, _ := svc.Liked(ctx, uid, req.AID)
+	ok, _ = svc.Liked(ctx, uid, req.AID)
 
 	article := ConvertArticleFromModel(item)
 	article.Comment = make([]*request.Comment, 0, len(comments))

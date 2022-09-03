@@ -30,6 +30,8 @@ const (
 	ErrSpaceJoined     ErrNumber = 12002
 	ErrSpaceNoJoinSelf ErrNumber = 12003
 	ErrSpaceNoOwner    ErrNumber = 12004
+	ErrSpaceNoTop      ErrNumber = 12005
+	ErrSpaceNoAccess   ErrNumber = 12006
 
 	// 文章
 	ErrArticleNotFound ErrNumber = 13000

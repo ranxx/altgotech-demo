@@ -82,3 +82,14 @@ func (s *Space) Get(ctx context.Context, id int) (*model.Space, error) {
 
 	return &item, nil
 }
+
+// Joined 是否加入或者自己创建
+func (s *Space) Joined(ctx context.Context, uid, sid int) (bool, error) {
+	total := (int64)(0)
+
+	err := s.db.Model(&model.Space{}).
+		Joins("LEFT JOIN space_user ON space_user.sid = space.id and space_user.user_id = ?", uid).
+		Where("space.id = ?", sid).Count(&total).Error
+
+	return total == 1, err
+}
