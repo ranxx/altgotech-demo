@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "a7e0121c-18c7-4245-b1ab-b85a1ef34631",
+		"name": "demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3972752"
+	},
+	"item": [
+		{
+			"name": "/api/v1/user/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"test\",\n    \"email\" : \"ran.star@foxmail.co\",\n    \"passwd\" : \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/user/register",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/user/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"ran.star@foxmail.co\",\n    \"passwd\" : \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/user/login",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"测试\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Host}}/api/v1/space",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space"
+					],
+					"query": [
+						{
+							"key": "all",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/join",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/2/join",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"2",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uid\" : 2   \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/admin",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/article",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\" : \"golang defer怎么使用\",\n    \"content\": \"defer 注册和调用的顺序是反着的，类似栈\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/article",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/articles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\" : \"golang defer怎么使用\",\n    \"content\": \"defer 注册和调用的顺序是反着的，类似栈\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/articles",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/article/:aid/comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"defer 我还不会\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/article/2/comment",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"article",
+						"2",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/article/:aid/like",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"defer 我还不会\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/article/{{Aid}}/like",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"article",
+						"{{Aid}}",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/article/:aid/unlike",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"defer 我还不会\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/article/{{Aid}}/unlike",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"article",
+						"{{Aid}}",
+						"unlike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/article/:aid/top",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"top\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/article/3/top",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"article",
+						"3",
+						"top"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/space/:sid/article/:aid/detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"top\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/v1/space/{{Sid}}/article/{{Aid}}/detail",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"space",
+						"{{Sid}}",
+						"article",
+						"{{Aid}}",
+						"detail"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

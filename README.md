@@ -13,3 +13,17 @@
 5. 可设置版块管理员，管理员有置顶的权限
 
 6. 全文搜索功能
+
+
+## 启动
+
+--config 可以指定配置文件的路径，不指定默认 config/config.json
+
+```bash
+go run main.go
+```
+
+[`Postman测试地址`](https://www.postman.com/orange-sunset-547788/workspace/demo/collection/3972752-a7e0121c-18c7-4245-b1ab-b85a1ef34631?action=share&creator=3972752)
+
+[或者Postman接口的json](./demo.postman_collection.json)
+
