@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"crypto/md5"
+	"encoding/base64"
 
 	"github.com/ranxx/altgotech-demo/app/request"
 	"github.com/ranxx/altgotech-demo/pkg/errors"
@@ -20,12 +21,18 @@ func NewUser(ctx context.Context) *User {
 }
 
 // passwd 密码处理
-func (s *User) passwd(p string) string {
+func (u *User) passwd(p string) string {
 	hash := md5.New()
 	hash.Write([]byte(p))
-	return string(hash.Sum(nil))
+
+	src := hash.Sum(nil)
+	dst := make([]byte, base64.StdEncoding.EncodedLen(len(src)))
+
+	base64.StdEncoding.Encode(dst, src)
+	return string(dst)
 }
 
+// GetService ...
 func (u *User) GetService() *user.Service {
 	return user.NewService()
 }
@@ -66,7 +73,7 @@ func (u *User) Register(ctx context.Context, req *request.UserRegisterRequest) (
 	}
 
 	// 注册
-	if err := svc.Create(ctx, req.Email, req.Passwd); err != nil {
+	if err := svc.Create(ctx, req.Name, req.Email, u.passwd(req.Passwd)); err != nil {
 		return nil, err
 	}
 

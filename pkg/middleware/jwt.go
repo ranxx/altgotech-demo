@@ -16,7 +16,7 @@ import (
 )
 
 func jwtGinAuth(ctx *gin.Context) error {
-	token := ctx.Request.Header.Get("token")
+	token := ctx.Request.Header.Get("Authorization")
 	if token == "null" || token == "" {
 		return errors.NewErrCode(errors.ErrAuthVerify, "请求未携带token，无权限访问")
 	}
@@ -49,8 +49,8 @@ func JwtGinAuth() gin.HandlerFunc {
 	}
 }
 
-// GetUserIdFromCtx 从ctx拿取 user_id
-func GetUserIdFromCtx(ctx context.Context) (int64, error) {
+// GetUserIDFromCtx 从ctx拿取 user_id
+func GetUserIDFromCtx(ctx context.Context) (int64, error) {
 	userid := ctx.Value("user.id")
 	if userid == nil {
 		return 0, errors.NewCode(errors.ErrAuthVerify)

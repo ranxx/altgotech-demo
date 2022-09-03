@@ -3,6 +3,7 @@ package db
 import (
 	"time"
 
+	"github.com/ranxx/altgotech-demo/config"
 	"github.com/ranxx/altgotech-demo/pkg/log"
 
 	"gorm.io/driver/mysql"
@@ -10,10 +11,13 @@ import (
 )
 
 var mysqlDB *gorm.DB
+var debugMysqlDB *gorm.DB
+var mysqlDebug bool
 
-func InitMysql(host string) {
+// InitMysql 初始化
+func InitMysql(rc config.Mysql) {
 	var err error
-	mysqlDB, err = gorm.Open(mysql.Open(host), &gorm.Config{})
+	mysqlDB, err = gorm.Open(mysql.Open(rc.Dsn), &gorm.Config{})
 	if err != nil {
 		log.Logrus().Panic("数据库链接错误")
 	}
@@ -21,10 +25,20 @@ func InitMysql(host string) {
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetMaxOpenConns(100)
 	sqlDB.SetConnMaxLifetime(59 * time.Second)
+	debugMysqlDB = mysqlDB.Debug()
 }
 
+// Mysql ...
 func Mysql() *gorm.DB {
+	if mysqlDebug {
+		return debugMysqlDB
+	}
 	return mysqlDB
+}
+
+// SetMysqlDebug ...s
+func SetMysqlDebug(ok bool) {
+	mysqlDebug = ok
 }
 
 // Pager 页面

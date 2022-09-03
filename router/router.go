@@ -15,6 +15,9 @@ import (
 func Router() http.Handler {
 	engine := gin.Default()
 
+	engine.Use(mid.GinCors())
+	engine.Use(mid.GinRecover())
+
 	api := engine.Group("/api/v1")
 
 	userCtl := user.NewUser()
@@ -26,6 +29,7 @@ func Router() http.Handler {
 
 	spaceCtl := space.NewSpace()
 	api.POST("/space", mid.JwtGinAuth(), mid.EncodeGinResponse(spaceCtl.Create).Gin)           // 创建板块
+	api.GET("/space", mid.JwtGinAuth(), mid.EncodeGinResponse(spaceCtl.List).Gin)              // 列表板块
 	api.POST("/space/:sid/join", mid.JwtGinAuth(), mid.EncodeGinResponse(spaceCtl.Join).Gin)   // 加入板块
 	api.POST("/space/:sid/admin", mid.JwtGinAuth(), mid.EncodeGinResponse(spaceCtl.Admin).Gin) // 设置管理员
 
@@ -35,6 +39,7 @@ func Router() http.Handler {
 	articleG.GET("/articles", mid.EncodeGinResponse(articleCtl.List).Gin)                 // 列表文章
 	articleG.POST("/article/:aid/comment", mid.EncodeGinResponse(articleCtl.Comment).Gin) // 评论文章
 	articleG.POST("/article/:aid/like", mid.EncodeGinResponse(articleCtl.Like).Gin)       // 点赞文章
+	articleG.POST("/article/:aid/unlike", mid.EncodeGinResponse(articleCtl.UnLike).Gin)   // 取消点赞文章
 	articleG.POST("/article/:aid/top", mid.EncodeGinResponse(articleCtl.Top).Gin)         // 置顶文章
 	articleG.GET("/article/:aid/detail", mid.EncodeGinResponse(articleCtl.Detail).Gin)    // 详情文章
 

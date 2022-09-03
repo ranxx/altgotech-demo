@@ -10,12 +10,22 @@ import (
 
 // Config 配置
 type Config struct {
-	Jwttoken string `json:"Jwttoken" yaml:"Jwttoken"`
-	Mysql    Mysql  `json:"Mysql" yaml:"Mysql"`
+	Addr     string `json:"addr" yaml:"addr"`
+	Jwttoken string `json:"jwttoken" yaml:"jwttoken"`
+	Mysql    Mysql  `json:"mysql" yaml:"mysql"`
+	Redis    Redis  `json:"redis" yaml:"redis"`
 }
 
+// Mysql ...
 type Mysql struct {
 	Dsn string `json:"dsn" yaml:"dsn"`
+}
+
+// Redis ...
+type Redis struct {
+	Host   string `json:"host" yaml:"host"`
+	Passwd string `json:"passwd" yaml:"passwd"`
+	DB     int    `json:"db" yaml:"db"`
 }
 
 var conf *Config = new(Config)
@@ -34,6 +44,7 @@ var (
 	configPath = flag.String("config", "./config/config.json", "config file path")
 )
 
+// Init ...
 func Init() {
 	flag.Parse()
 	data, err := ioutil.ReadFile(*configPath)

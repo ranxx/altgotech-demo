@@ -2,7 +2,8 @@ package db
 
 import "time"
 
+// Base base
 type Base struct {
-	ID        int       `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
-	CreatedAt time.Time `gorm:"column:created_at" json:"created_at"`
+	ID        int       `gorm:"column:id;primaryKey;autoIncrement;comment:主键"`
+	CreatedAt time.Time `gorm:"column:created_at;comment:创建时间"`
 }

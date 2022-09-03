@@ -8,8 +8,9 @@ import (
 type User struct {
 	db.Base
 
-	Email  string `gorm:"column:email;unique;type:varchar(64)"`
-	Passwd string `gorm:"column:passwd;type:varchar(256)"`
+	Name   string `gorm:"column:name;unique;type:varchar(64);comment:用户名"`
+	Email  string `gorm:"column:email;unique;type:varchar(64);comment:邮箱"`
+	Passwd string `gorm:"column:passwd;type:varchar(512);comment:密码"`
 }
 
 // TableName ...

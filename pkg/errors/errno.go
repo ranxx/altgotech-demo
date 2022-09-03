@@ -23,4 +23,14 @@ const (
 	ErrUserEmailExist ErrNumber = 11000
 	ErrUserNotFound   ErrNumber = 11001
 	ErrUserPasswd     ErrNumber = 11002
+
+	// 板块
+	ErrSpaceNameExist  ErrNumber = 12000
+	ErrSpaceNotFound   ErrNumber = 12001
+	ErrSpaceJoined     ErrNumber = 12002
+	ErrSpaceNoJoinSelf ErrNumber = 12003
+	ErrSpaceNoOwner    ErrNumber = 12004
+
+	// 文章
+	ErrArticleNotFound ErrNumber = 13000
 )

@@ -26,8 +26,9 @@ func (s *Service) Exist(ctx context.Context, email string) (bool, error) {
 }
 
 // Create 创建用户
-func (s *Service) Create(ctx context.Context, email, passwd string) error {
+func (s *Service) Create(ctx context.Context, name, email, passwd string) error {
 	return s.d.Create(ctx, &model.User{
+		Name:   name,
 		Email:  email,
 		Passwd: passwd,
 	})
